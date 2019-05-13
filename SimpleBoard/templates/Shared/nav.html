@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+    <a class="navbar-brand" href="">TunaBoard</a>
+
+    <ul class="navbar-nav">
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link">Welcome! {{user.username}}</a>
+            </li>
+            <li class="nav-item">
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">logout</button>
+                </form>
+            </li>
+        {% else %}
+            <li class="nav-item active">
+                    <button type="button" class="btn" data-toggle="modal" data-target="#signin-modal">Sign in</button>
+            </li>
+        {% endif %}
+
+        <li class="nav-item">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signup-modal">Sign up</button>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav">
+            <a href="{% url 'createPost' %}"><button type="button" class="btn">createPost</button></a>
+    </ul>
+</nav>
+
+ 
+

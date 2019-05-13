@@ -1,31 +1,39 @@
-<!DOCTYPE html>
-    <head>
-        <meta charset="utf-8">
-        <link ref="/static/style.css">
-    </head>
-    <body>
-        {% if user.is_authenticated %} 
-            <p>Welcome, {{ user.username }}. Thanks for logging in.</p> 
-        {% else %} 
-            <p>Welcome, new user. Please log in.</p> 
-        {% endif %}
-        <div>
-            <a href="{% url 'createPost' %}"><button type="button">createPost</button></a>
-        </div>
-        <div>
-            <a href="{% url 'signin' %}"><button type="button">signin</button></a>
-            <a href="{% url 'signup' %}"><button type="button">signup</button></a>
-            <form method="POST" action="{% url 'logout' %}">
-                {% csrf_token %}
-                <button type="submit">logout</button>
-            </form>
-        </div>
+{% extends 'Shared/base.html' %}
 
+{% load static %}
+
+{% block extra_css %}
+        .content {
+            width:400px;
+            height:300px;
+            margin: 10px;
+            border:1px solid blue;
+        }
+        #contents {
+            display:flex;
+            flex-direction:row;
+            flex-wrap:wrap;
+            justify-content: center;
+
+            border:1px solid black;
+            padding: 2%;
+        }
+{% endblock %}
+
+{% block body %}
+    <div id="contents">
         {% for post in posts %}
-        <div>
+        <div class="content">
             <h2>{{post.title}}</h2>
             <h2>{{post.context}}</h2>
         </div>
         {% endfor %}
-    </body>
-</html>
+    </div>
+
+    <!--modal-->
+    {% include 'Modals/signup_modal.html' %}
+    {% include 'Modals/signin_modal.html' %}
+{% endblock %}
+
+{% block extra_script %}
+{% endblock %}

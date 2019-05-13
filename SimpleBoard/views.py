@@ -8,7 +8,9 @@ from django.http import HttpResponse
 
 def index(request):
     posts = Post.objects.all()
-    return render(request, 'index.html', {'posts': posts})
+    userForm = UserForm()
+    loginForm = LoginForm()
+    return render(request, 'index.html', {'posts': posts, 'signup_form' : userForm, 'signin_form' : loginForm})
 
 def signup(request):
     if request.method == "GET":
@@ -56,10 +58,13 @@ def logout(request):
         return redirect('index')
 
 def createPost(request):
-    if request.method == 'GET':
-        form = PostForm()
-        return render(request, 'createPost.html', {'form':form})
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            form = PostForm()
+            return render(request, 'createPost.html', {'form':form})
+        else:
+            form = PostForm(request.POST)
+            form.save()
+            return redirect('index')
     else:
-        form = PostForm(request.POST)
-        form.save()
-        return redirect('index')
+        return redirect('signin')

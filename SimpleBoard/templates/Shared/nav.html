@@ -1,7 +1,10 @@
-<nav class="navbar navbar-expand-sm bg-light navbar-light">
+<nav class="navbar navbar-expand-sm bg-light navbar-light" id="nav">
     <a class="navbar-brand" href="">TunaBoard</a>
-
     <ul class="navbar-nav">
+            <a href="{% url 'createPost' %}"><button type="button" class="btn">createPost</button></a>
+    </ul>
+
+    <ul class="navbar-nav" id="auth">
         {% if user.is_authenticated %}
             <li class="nav-item">
                 <a class="nav-link">Welcome! {{user.username}}</a>
@@ -21,10 +24,6 @@
         <li class="nav-item">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signup-modal">Sign up</button>
         </li>
-    </ul>
-
-    <ul class="navbar-nav">
-            <a href="{% url 'createPost' %}"><button type="button" class="btn">createPost</button></a>
     </ul>
 </nav>
 

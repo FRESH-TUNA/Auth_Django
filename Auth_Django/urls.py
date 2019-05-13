@@ -22,4 +22,6 @@ urlpatterns = [
     path('', SimpleBoard.views.index, name="index"),
     path('signup', SimpleBoard.views.signup, name="signup"),
     path('signin', SimpleBoard.views.signin, name="signin"),
+    path('logout', SimpleBoard.views.logout, name="logout"),
+    path('createPost', SimpleBoard.views.createPost, name="createPost"),
 ]

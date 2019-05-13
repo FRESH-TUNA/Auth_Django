@@ -1,0 +1,6 @@
+<h2>포스트쓰기</h2>
+<form method="post" action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">제출하기</button>
+</form>

@@ -16,6 +16,6 @@ class PostForm(forms.ModelForm):
     title = forms.CharField()
     context = forms.CharField(max_length=20)
     class Meta:
-        model = User
+        model = Post
         fields = ('title', 'context')
 
